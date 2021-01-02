@@ -6,11 +6,22 @@
     <style>
         canvas {
             border: 1px solid black;
+            display: inline;
+        }
+
+        #cor {
+            float:right;
         }
     </style>
 </head>
 <body>
-    <canvas id= "grid"></canvas>
+    <canvas id= "grid" onmousemove="print_cor(event)" onclick="drawLine(event)"></canvas>
+    
+    <div id="cor">
+        
+    </div>
+
     <script src="canvas.js"></script>
+    <script src="text.js"></script>
 </body>
 </html>
