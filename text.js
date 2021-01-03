@@ -43,6 +43,10 @@ window.addEventListener("load", () => {
     canvas.addEventListener('mouseup', finishedPosition);
     canvas.addEventListener('mousemove', draw);
 
+
+    
+
+
 })
 
 var select = document.getElementById("select");
@@ -53,36 +57,26 @@ select.addEventListener("change", () => {
     var text = e.options[e.selectedIndex].text;
 
     if (text == "선") {
-        // var x2_in = document.createElement("INPUT type='number' id='x2'");
-        // var y2_in = document.createElement("INPUT type='number' id='y2'");
-        // var br = document.createElement("BR");
-        // var text1 = document.createElement("TEXT");
-        // var text2 = document.createElement("TEXT");
-
-        // var x2_text = document.createTextNode("")
-        // var y2_text = document.createTextNode("")
-
-        // var text_1 = document.createTextNode("x2 : ");
-        // var text_2 = document.createTextNode("y2 : ");
-
-        // // x2_in.appendChild(x2_text);
-        // // y2_in.appendChild(y2_text);
-        // text1.appendChild(text_1);
-        // text2.appendChild(text_2);
-
-        // document.getElementById("line_input").appendChild(text1);
-        // document.getElementById("line_input").appendChild(x2_in);
-        // document.getElementById("line_input").appendChild(br);
-        // document.getElementById("line_input").appendChild(text2);
-        // document.getElementById("line_input").appendChild(y2_in);
+        
 
         var div = document.getElementById("line_input");
 
         var text = "<label id='x2_label'>x2 : <input type='number' id='x2'></input></label><br><label id='y2_label'>y2 : <input type='number' id='y2'></input></label>"
 
+        var dot_size = document.getElementById("dot_size_label");
+
+        dot_size.remove();
+
         div.innerHTML = text;
     }
     if (text == "점") {
+
+        var div = document.getElementById("dot_size");
+
+        var text = "<label id='dot_size_label'>점크기<br><input type='range' min= '1' max= '25' step='1' value = '6' id= 'dot_size_set'><br></label>"
+
+        div.innerHTML = text;
+
         var x2 = document.getElementById("x2_label");
         var y2 = document.getElementById("y2_label");
 
@@ -99,7 +93,6 @@ btn.addEventListener("click", () => {
 
     var x1 = document.getElementById("x1").value;
     var y1 = document.getElementById("y1").value;
-    console.log("qkjqjkqk");
 
     if (x1 == "") {
         alert("x1 값 없음");
@@ -144,11 +137,14 @@ btn.addEventListener("click", () => {
 
         else if (text == "점") {
 
+            var dot_size = document.getElementById("dot_size_set").value;
+
+
             x1 = x1 * 25 + 400;
             y1 = ((y1 * 25) - 400) * -1;
 
             cx.beginPath();
-            cx.arc(x1, y1, 6, 0, 2 * Math.PI);
+            cx.arc(x1, y1, dot_size, 0, 2 * Math.PI);
             cx.fill();
         }
 
@@ -156,4 +152,8 @@ btn.addEventListener("click", () => {
     }
 
 
+})
+var dot_size = document.getElementById("dot_size_set");
+dot_size.addEventListener("input", ()  => {
+    document.getElementById("show_size").innerText = dot_size.value;
 })

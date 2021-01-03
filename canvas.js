@@ -9,10 +9,6 @@ var drawGrid = function(w, h, id) {
             <pattern id="smallGrid" width="25" height="25" patternUnits="userSpaceOnUse"> \
                 <path d="M 25 0 L 0 0 0 25" fill="none" stroke="blue" stroke-width="0.5" /> \
             </pattern> \
-            <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse"> \
-                <rect width="25" height="25" fill="url(#smallGrid)" /> \
-                <path d="M 25 0 L 0 0 0 25" fill="none" stroke="gray" stroke-width="1" /> \
-            </pattern> \
         </defs> \
         <rect width="100%" height="100%" fill="url(#smallGrid)" /> \
     </svg>';

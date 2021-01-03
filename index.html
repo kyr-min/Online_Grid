@@ -17,27 +17,41 @@
             left: 1000px;
             bottom: 500px;
         }
+        #show_size {
+            display: inline;
+            padding: 0px;
+            margin: 0px;
+        }
     </style>
 </head>
 <body>
     <canvas id= "grid" onmousemove="print_cor(event)"></canvas>
     
     <div id="cor"></div>
-        <form id="form">
-            <select name="type" id="select">
-                <option value="dot">점</option>
-                <option value="line">선</option>
-            </select>
-            <input type="button" value="입력" id = "btn" >
-            <br>
-            <label>x1 : <input type="number" id="x1"></label>
-            <br>
-            <label>y1 : <input type="number" id="y1"></lable>
-            <div id="line_input">
 
-            </div>
-            
-        </form>
+    <form id="form">
+        <div id="dot_size">
+            <label id = "dot_size_label">
+                점크기&nbsp;&nbsp;<p id = "show_size"></p><br>
+                <input type="range" min= "1" max= "25" step="1" value = "6" id= "dot_size_set"><br>
+            </label>
+        </div>
+
+        <select name="type" id="select">
+            <option value="dot">점</option>
+            <option value="line">선</option>
+        </select>
+        <input type="button" value="입력" id = "btn" >
+        <br>
+        <label>x1 : <input type="number" id="x1"></label>
+        <br>
+        <label>y1 : <input type="number" id="y1"></lable>
+        <div id="line_input">
+
+        </div>        
+    </form>
+
+
     <script src="text.js"></script>
     <script src="canvas.js"></script>
     
