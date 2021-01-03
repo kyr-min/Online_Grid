@@ -26,8 +26,8 @@ window.addEventListener("load", () => {
     }
 
     function draw(e) {
-        if(!painting) 
-            return ;
+        if (!painting)
+            return;
         cx.lineWidth = 5;
         cx.lineCap = "round";
 
@@ -36,7 +36,7 @@ window.addEventListener("load", () => {
 
         cx.beginPath();
         cx.moveTo(e.offsetX, e.offsetY)
-        
+
     }
 
     canvas.addEventListener('mousedown', startPosition);
@@ -52,8 +52,7 @@ select.addEventListener("change", () => {
     var e = document.getElementById("select");
     var text = e.options[e.selectedIndex].text;
 
-    if(text == "선"){
-        console.log("changed");
+    if (text == "선") {
         // var x2_in = document.createElement("INPUT type='number' id='x2'");
         // var y2_in = document.createElement("INPUT type='number' id='y2'");
         // var br = document.createElement("BR");
@@ -83,19 +82,78 @@ select.addEventListener("change", () => {
 
         div.innerHTML = text;
     }
-    if(text == "점"){
+    if (text == "점") {
         var x2 = document.getElementById("x2_label");
         var y2 = document.getElementById("y2_label");
 
         x2.remove();
         y2.remove();
-
-
     }
 })
 
-function submit() {
-    if(select.nodeValue == "line"){
+var btn = document.getElementById("btn");
+
+btn.addEventListener("click", () => {
+    var e = document.getElementById("select");
+    var text = e.options[e.selectedIndex].text;
+
+    var x1 = document.getElementById("x1").value;
+    var y1 = document.getElementById("y1").value;
+    console.log("qkjqjkqk");
+
+    if (x1 == "") {
+        alert("x1 값 없음");
+
+    } 
+
+    else if (y1 == "") {
+        alert("y1 값 없음");
+
+    } 
+    
+    else if (x1 != "" && y1 != "") {
+
+        if (text == "선") {
+
+            var x2 = document.getElementById("x2").value;
+            var y2 = document.getElementById("y2").value;
+
+            if (x2 == "") {
+                alert("x2 값 없음");
+            } 
+
+            else if (y2 == "") {
+                alert("y2 값 없음");
+            } 
+
+            else if (x2 != "" && y2 != "") {
+                
+                x1 = x1 * 25 + 400;
+                x2 = x2 * 25 + 400;
+                y1 = ((y1 * 25) - 400) * -1;
+                y2 = ((y2 * 25) - 400) * -1;
+
+                cx.beginPath();
+                cx.moveTo(x1, y1);
+                cx.lineTo(x2, y2);
+                cx.stroke();
+
+                cx.beginPath();
+            } 
+        }
+
+        else if (text == "점") {
+
+            x1 = x1 * 25 + 400;
+            y1 = ((y1 * 25) - 400) * -1;
+
+            cx.beginPath();
+            cx.arc(x1, y1, 6, 0, 2 * Math.PI);
+            cx.fill();
+        }
+
 
     }
-}
+
+
+})

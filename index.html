@@ -23,12 +23,12 @@
     <canvas id= "grid" onmousemove="print_cor(event)"></canvas>
     
     <div id="cor"></div>
-        <form action="" id="form">
+        <form id="form">
             <select name="type" id="select">
                 <option value="dot">점</option>
                 <option value="line">선</option>
             </select>
-            <button type="submit" onclick="submit()">입력</button>
+            <input type="button" value="입력" id = "btn" >
             <br>
             <label>x1 : <input type="number" id="x1"></label>
             <br>
@@ -38,9 +38,6 @@
             </div>
             
         </form>
-    <form action="">
-        
-    </form>
     <script src="text.js"></script>
     <script src="canvas.js"></script>
     
