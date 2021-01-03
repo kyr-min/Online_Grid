@@ -28,6 +28,22 @@ var drawGrid = function(w, h, id) {
       DOMURL.revokeObjectURL(url);
     }
     img.src = url;
+
+
+    //vertical
+    c.beginPath();
+    c.moveTo(400, 0);
+    c.lineTo(400, 800);
+    c.stroke();
+
+
+    //horizontal
+    c.beginPath();
+    c.moveTo(0, 400);
+    c.lineTo(800, 400);
+    c.stroke();
+
+    c.beginPath();
 }
 
 
