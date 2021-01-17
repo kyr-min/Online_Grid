@@ -3,26 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Grid</title>
-    <style>
-        canvas {
-            border: 1px solid black;
-            display: inline;
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function display() {
+            var dot_size = document.getElementById("dot_size");
+            var show_size_div = document.getElementById("show_size");
+            show_size_div.innerText = "     " + dot_size.value;
         }
-
-        #cor {
-            float:right;
-        }
-        #form {
-            position: absolute;
-            left: 1000px;
-            bottom: 500px;
-        }
-        #show_size {
-            display: inline;
-            padding: 0px;
-            margin: 0px;
-        }
-    </style>
+    </script>
 </head>
 <body>
     <canvas id= "grid" onmousemove="print_cor(event)"></canvas>
@@ -30,30 +18,25 @@
     <div id="cor"></div>
 
     <form id="form">
-        <div id="dot_size">
-            <label id = "dot_size_label">
-                점크기&nbsp;&nbsp;<p id = "show_size"></p><br>
-                <input type="range" min= "1" max= "25" step="1" value = "6" id= "dot_size_set"><br>
-            </label>
-        </div>
+
+        <input type="color" id="color" onchange="change_col(this)">
+        <div id="dot_size_div"></div>
 
         <select name="type" id="select">
-            <option value="dot">점</option>
             <option value="line">선</option>
+            <option value="dot">점</option>
+            <option value="cir">원</option>
         </select>
-        <input type="button" value="입력" id = "btn" >
+        <input type="button" value="출력" id = "btn" >
         <br>
-        <label>x1 : <input type="number" id="x1"></label>
-        <br>
-        <label>y1 : <input type="number" id="y1"></lable>
-        <div id="line_input">
-
-        </div>        
+        <div id="xy1_input"></div>
+        <div id="xy2_input"></div>    
+        <div id="rad_input"></div>    
+    
     </form>
 
-
-    <script src="text.js"></script>
     <script src="canvas.js"></script>
-    
+    <script src="draw.js"></script>
+    <script src="shapes.js"></script>
 </body>
 </html>
