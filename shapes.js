@@ -3,7 +3,23 @@ var select = document.getElementById("select");
 var canvas = document.getElementById("grid");
 var cx = canvas.getContext('2d');
 
+var colorPick = document.getElementById("color");
+
 var color;
+
+colorPick.addEventListener("change", ()=> {
+    color = colorPcik.value;
+})
+
+function print_cor(e) {
+    var cors = document.getElementById('cor');
+
+    var x_cor = parseInt((e.offsetX - 400) / 25);
+    var y_cor = parseInt((e.offsetY * -1 + 400) / 25);
+
+    var text = "x= " + x_cor + "\n" + "y= " + y_cor;
+    cors.innerText = text;
+}
 
 var remove_label = function () {
     var label = document.getElementsByTagName("label");
@@ -58,6 +74,38 @@ window.addEventListener("load", () => {
     add_xy2();
 })
 
+window.addEventListener("load", () => {
+    let painting = false;
+
+    function startPosition() {
+        painting = true;
+    }
+
+    function finishedPosition() {
+        painting = false;
+        cx.beginPath();
+    }
+
+    function draw(e) {
+        if (!painting)
+            return;
+        cx.lineWidth = 5;
+        cx.lineCap = "round";
+
+        cx.lineTo(e.offsetX, e.offsetY);
+        cx.strokeStyle = color;
+        cx.stroke();
+
+        cx.beginPath();
+        cx.moveTo(e.offsetX, e.offsetY)
+
+    }
+
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', finishedPosition);
+    canvas.addEventListener('mousemove', draw);
+})
+
 select.addEventListener("change", () => {
 
     var e = document.getElementById("select");
@@ -91,8 +139,6 @@ btn.addEventListener("click", () => {
 
     var x1 = document.getElementById("x1").value;
     var y1 = document.getElementById("y1").value;
-
-    var color = document.getElementById("color").value;
 
     if (x1 == "") {
         alert("x1 값 없음");
@@ -150,6 +196,7 @@ btn.addEventListener("click", () => {
 
             cx.beginPath();
             cx.arc(x1, y1, dot_size, 0, 2 * Math.PI);
+            cx.fillStyle = color;
             cx.fill();
 
             cx.beginPath();
@@ -166,11 +213,11 @@ btn.addEventListener("click", () => {
 
                 cx.beginPath();
                 cx.arc(x1, y1, rad*25, 0, 2 * Math.PI);
+                cx.strokeStyle = color;
                 cx.stroke();
                 cx.beginPath();
             }
         }
     }
-
-
 })
+
