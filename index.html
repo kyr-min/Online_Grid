@@ -8,7 +8,7 @@
         function display() {
             var dot_size = document.getElementById("dot_size");
             var show_size_div = document.getElementById("show_size");
-            show_size_div.innerText = "     " + dot_size.value;
+            show_size_div.innerText = "     " + dot_size.value + "px";
         }
     </script>
 </head>
@@ -20,6 +20,7 @@
     <form id="form">
 
         <input type="color" id="color" onchange="change_col(this)">
+        <div id="stroke_size_div"></div>
         <div id="dot_size_div"></div>
 
         <select name="type" id="select">
@@ -27,6 +28,7 @@
             <option value="dot">점</option>
             <option value="cir">원</option>
         </select>
+        <div id="FoH_div"></div>
         <input type="button" value="출력" id = "btn" >
         <br>
         <div id="xy1_input"></div>

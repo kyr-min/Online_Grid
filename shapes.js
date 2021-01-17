@@ -8,7 +8,7 @@ var colorPick = document.getElementById("color");
 var color;
 
 colorPick.addEventListener("change", ()=> {
-    color = colorPcik.value;
+    color = colorPick.value;
 })
 
 function print_cor(e) {
@@ -59,9 +59,16 @@ var add_xy2 = function () {
 
 var add_rad = function () {
     var rad_div = document.getElementById("rad_input");
-    var rad_input_text = "<label id='rad_label'>반지름 : <input type='number' id='rad'></input></label>"
+    var rad_input_txt = "<label id='rad_label'>반지름 : <input type='number' id='rad'></input></label>"
 
-    rad_div.innerHTML = rad_input_text;
+    rad_div.innerHTML = rad_input_txt;
+}
+
+var addFoH = function () {
+    var FoH_div = document.getElementById("FoH_div");
+    var FoH_select_txt = "<label id='FoH_label'><select id='FoH'><option value='fill'>채우기</option><option value='hollow'>비우기</option></select></label>"
+
+    FoH_div.innerHTML = FoH_select_txt;
 }
 
 var change_col = function (e) {
@@ -126,6 +133,7 @@ select.addEventListener("change", () => {
     if(text === "원") {
         remove_label();
 
+        addFoH();
         add_xy1();
         add_rad();
     }
@@ -204,6 +212,9 @@ btn.addEventListener("click", () => {
 
         else if(text === "원"){
             var rad = document.getElementById("rad").value;
+            var FoH_select = document.getElementById("FoH");
+
+            var FoH = FoH_select.options[FoH_select.selectedIndex].text;
 
             if(rad != ""){
                 x1 = x1 * 25 + 400;
@@ -213,8 +224,14 @@ btn.addEventListener("click", () => {
 
                 cx.beginPath();
                 cx.arc(x1, y1, rad*25, 0, 2 * Math.PI);
-                cx.strokeStyle = color;
-                cx.stroke();
+                if(FoH === "채우기"){
+                    cx.fillStyle = color;
+                    cx.fill();
+                } else if ( FoH === "비우기") {
+                    cx.strokeStyle = color;
+                    cx.stroke();
+                }
+
                 cx.beginPath();
             }
         }
