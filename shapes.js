@@ -1,87 +1,82 @@
-var select = document.getElementById("select");
+var select = document.getElementById("select"); //사용자가 사용할 도구 
 
-var canvas = document.getElementById("grid");
-var cx = canvas.getContext('2d');
+var canvas = document.getElementById("grid"); // 모눈종이 객체
+var cx = canvas.getContext('2d'); // 이차원 도형들을 사용할 것이므로 context를 2d로 지정
 
-var colorPick = document.getElementById("color");
+var colorPick = document.getElementById("color"); // 색상선택 input
 
-var color;
+var color; //현재 선택된 색상을 저장하기위한 변수
 
-colorPick.addEventListener("change", ()=> {
+colorPick.addEventListener("change", ()=> { //색상이 변경되면 실행, 변경된 색상을 color 변수에 저장
     color = colorPick.value;
 })
 
-function print_cor(e) {
-    var cors = document.getElementById('cor');
+function print_cor(e) { //모눈종이 기준 마우스 좌표 출력
+    var cors = document.getElementById('cor'); // 출력할 위치 div 지정
 
-    var x_cor = parseInt((e.offsetX - 400) / 25);
+    var x_cor = parseInt((e.offsetX - 400) / 25);  // 정가운데 (0,0) 기준으로 좌표 계산, 정수형으로 변환
     var y_cor = parseInt((e.offsetY * -1 + 400) / 25);
 
-    var text = "x= " + x_cor + "\n" + "y= " + y_cor;
+    var text = "x= " + x_cor + "\n" + "y= " + y_cor; //innerText 설정
     cors.innerText = text;
 }
 
-var remove_label = function () {
-    var label = document.getElementsByTagName("label");
-    var cnt = 0;
+var remove_label = function () { //select가 달라질때마다 필요한 도구가 다르기때문에 이전 도구들을 없애는 함수
+    var label = document.getElementsByTagName("label"); // label 태그 컬렉션
+    var cnt = 0;  //몇개를 삭제했는지 저장하는 변수 cnt
 
-    var init_label_length = label.length;
+    var init_label_length = label.length;  // 함수를 호출했을때 기준 label 컬렉션의 길이
 
     while(1){
-        label[0].remove();
+        label[0].remove(); // 0번째 삭제 후 , cnt + 1
         cnt++;
-        if(cnt === init_label_length){
+        if(cnt === init_label_length){ // cnt가 init_label_length 와 동일하다면 return으로 함수 종료
             return ;
         }
     }
 }
 
-var add_dotSize = function () {
+var add_dotSize = function () { // 점사이즈 옵션 세팅하는 함수
     var dot_size_div = document.getElementById("dot_size_div");
     var dot_size_text = "<label id='dot_size_label'>점크기<div id='show_size'></div><br><input type='range' min= '1' max= '25' step='1' value = '6' id= 'dot_size' onInput='display()'><br></label>";
 
     dot_size_div.innerHTML = dot_size_text;
 }
 
-var add_xy1 = function () {
+var add_xy1 = function () { //x1, y1 좌표 input 세팅하는 함수
     var xy1_div = document.getElementById("xy1_input");
     var xy1_input_txt = "<label id='x1_label'>x1 : <input type='number' id='x1'></label><br><label id='y1_label' >y1 : <input type='number' id='y1'></lable>";
 
     xy1_div.innerHTML = xy1_input_txt;
 }
 
-var add_xy2 = function () {
+var add_xy2 = function () { //x2, x2 좌표 input 세팅하는 함수
     var xy2_div = document.getElementById("xy2_input");
     var xy2_input_txt = "<label id='x2_label'>x2 : <input type='number' id='x2'></input></label><br><label id='y2_label'>y2 : <input type='number' id='y2'></input></label>"
 
     xy2_div.innerHTML = xy2_input_txt;
 }
 
-var add_rad = function () {
+var add_rad = function () { //반지름 input 세팅하는 함수
     var rad_div = document.getElementById("rad_input");
     var rad_input_txt = "<label id='rad_label'>반지름 : <input type='number' id='rad'></input></label>"
 
     rad_div.innerHTML = rad_input_txt;
 }
 
-var addFoH = function () {
+var addFoH = function () { //원을 채울지 말지 선택하는 selct를 세팅하는 함수
     var FoH_div = document.getElementById("FoH_div");
     var FoH_select_txt = "<label id='FoH_label'><select id='FoH'><option value='fill'>채우기</option><option value='hollow'>비우기</option></select></label>"
 
     FoH_div.innerHTML = FoH_select_txt;
 }
 
-var change_col = function (e) {
-    color = e.value;
-}
-
-
-window.addEventListener("load", () => {
+window.addEventListener("load", () => { // 처음 input 설정, 선으로 되어있기에 xy1 과 xy2 함수 호출
     add_xy1();
     add_xy2();
 })
 
-window.addEventListener("load", () => {
+window.addEventListener("load", () => {  //모눈종이위에 그릴수있게 하는 함수
     let painting = false;
 
     function startPosition() {
